@@ -49,3 +49,19 @@ describe("fails()", function () {
     expect(afterFail).toMatchObject(expected);
   });
 });
+
+describe("get()", function () {
+  it("should return same object if enhancement is 0", () => {
+    const item = { name: "item1", durability: 90, enhancement: 0 };
+    const expected = { ...item };
+    const repairedItem = enhancer.get(item);
+    expect(repairedItem).toMatchObject(expected);
+  });
+
+  it("should return same object if enhancement is not 0", () => {
+    const item = { name: "item1", durability: 90, enhancement: 2 };
+    const expected = { ...item, name: "+[2]item1" };
+    const repairedItem = enhancer.get(item);
+    expect(repairedItem).toMatchObject(expected);
+  });
+});
